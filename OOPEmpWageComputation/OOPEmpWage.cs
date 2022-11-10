@@ -6,15 +6,17 @@
         const int IS_PART_TIME = 2;
         const int EMP_RATE_PER_HOUR = 20;
         const int NUM_OF_WORKING_DAYS = 20;
+        const int MAX_HRS_IN_MONTH = 100;
         public static void Welcome()
         {
             Console.WriteLine("Welcome to EmployeeWage Computation Program");
         }
         public static void EmpWage20Day()
         {
-            int empHrs = 0, empWage = 0, TotalEmpWage = 0;
-            for (int days = 1; days <= NUM_OF_WORKING_DAYS; days++)
+            int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+            while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
             {
+                totalWorkingDays++;
                 Random random = new Random();
                 int empCheck = random.Next(0, 3);
                 switch (empCheck)
@@ -29,10 +31,11 @@
                         empHrs = 0;
                         break;
                 }
-                empWage = EMP_RATE_PER_HOUR * empHrs;
-                TotalEmpWage += empWage;
+                totalEmpHrs+=empHrs;
+                Console.WriteLine("Day#:" + totalWorkingDays + "  " + "Working Hours : " + empHrs);
             }
-            Console.WriteLine("Employee Wage for 20 Days is : " + TotalEmpWage);
+            int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
+            Console.WriteLine($"totalEmpHrs : {totalEmpHrs}  *  EMP_RATE_PER_HOUR : {EMP_RATE_PER_HOUR} = totalEmpWage : {totalEmpWage}");
         }
         public static void Main(string[] args)
         {
